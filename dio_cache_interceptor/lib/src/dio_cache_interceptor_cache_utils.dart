@@ -32,6 +32,11 @@ extension _DioCacheInterceptorUtils on DioCacheInterceptor {
       return true;
     }
 
+    var noCache = request?.extra["no-cache"] ?? false;
+    if (noCache) {
+      return true;
+    }
+
     final rqMethod = request?.method.toUpperCase();
     var result = (rqMethod != _getMethod);
     result &= (!options.allowPostMethod || rqMethod != _postMethod);
